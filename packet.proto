@@ -31,13 +31,15 @@ message WiFiConnectResponseInfo {
   oneof type {
     Placeholder placeholder = 1;
     Timeout timeout = 2;
-    ConnectedToWiFi connectedToWiFi = 3;
-    ConnectingToServer connectingToServer = 4;
-    FailedConnectingToServer failedConnectingToServer = 5;
+    ConnectingToWiFi connectingToWiFi = 3;
+    ConnectedToWiFi connectedToWiFi = 4;
+    ConnectingToServer connectingToServer = 5;
+    FailedConnectingToServer failedConnectingToServer = 6;
   };
 }
 
 message Timeout{}
+message ConnectingToWiFi{}
 message ConnectedToWiFi{}
 message ConnectingToServer{}
 message FailedConnectingToServer{
