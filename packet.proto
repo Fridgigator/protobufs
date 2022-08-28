@@ -1,15 +1,23 @@
 syntax = "proto3";
 import "nanopb.proto";
-message Packet {
+message BLESendPacket {
   oneof type {
     Placeholder placeholder = 1;
-    WiFiVector wifi = 2;
     GetWiFi getWifi = 3;
+    WiFiConnectInfo wifiConnectInfo = 4;
+    RegisterNonce nonce = 5;
   };
 }
 
 message Placeholder{}
 message GetWiFi{}
+message WiFiConnectInfo {
+  string ssid = 1 [(nanopb).max_size = 32];
+  string password = 2 [(nanopb).max_size = 64];
+}
+message RegisterNonce {
+  string nonce = 1 [(nanopb).max_size = 16];
+}
 
 message WiFiVector {
   repeated WiFiData data = 1 [(nanopb).max_count = 64];
@@ -20,11 +28,6 @@ message WiFiData {
   uint64 bssid = 2;
   uint32 Channel = 3;
   bool isEncrypted = 4;
-}
-
-message WiFiConnectInfo {
-  string ssid = 1 [(nanopb).max_size = 32];
-  string password = 2 [(nanopb).max_size = 64];
 }
 
 message WiFiConnectResponseInfo {
@@ -46,3 +49,5 @@ message FailedConnectingToServer{
   int32 causeid = 1;
   string cause = 2 [(nanopb).max_size = 32];
 }
+
+
