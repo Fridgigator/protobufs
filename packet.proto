@@ -3,10 +3,10 @@ import "nanopb.proto";
 message BLESendPacket {
   oneof type {
     Placeholder placeholder = 1;
-    GetWiFi getWifi = 3;
-    WiFiConnectInfo wifiConnectInfo = 4;
-    GetWiFiConnectState getWifiConnectState = 5;
-    RegisterNonce nonce = 6;
+    GetWiFi getWifi = 2;
+    WiFiConnectInfo wifiConnectInfo = 3;
+    GetWiFiConnectState getWiFiConnectState = 4;
+    RegisterNonce nonce = 5;
   };
 }
 
