@@ -5,7 +5,8 @@ message BLESendPacket {
     Placeholder placeholder = 1;
     GetWiFi getWifi = 3;
     WiFiConnectInfo wifiConnectInfo = 4;
-    RegisterNonce nonce = 5;
+    GetWiFiConnectState getWifiConnectState = 5;
+    RegisterNonce nonce = 6;
   };
 }
 
@@ -15,6 +16,7 @@ message WiFiConnectInfo {
   string ssid = 1 [(nanopb).max_size = 32];
   string password = 2 [(nanopb).max_size = 64];
 }
+message GetWiFiConnectState{}
 message RegisterNonce {
   string nonce = 1 [(nanopb).max_size = 16];
 }
