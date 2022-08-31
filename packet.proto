@@ -1,4 +1,5 @@
 syntax = "proto3";
+option go_package = "./main";
 import "nanopb.proto";
 message BLESendPacket {
   oneof type {
@@ -52,4 +53,12 @@ message FailedConnectingToServer{
   string cause = 2 [(nanopb).max_size = 32];
 }
 
+message LoginResponse {
+  oneof type {
+    LoginError login_error = 1;
+    Timeout timeout = 2;
+  }
+}
+
+message LoginError{}
 
