@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+message ToFrontEnd {
+    oneof type {
+        Nonce github_nonce = 1;
+        AccessCode access_code = 2;
+    };
+}
+
+message Nonce {
+    string nonce = 1;
+}
+
+message AccessCode {
+    string access_code = 1;
+    bool failed = 2;
+}
