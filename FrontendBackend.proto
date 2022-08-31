@@ -1,8 +1,9 @@
 syntax = "proto3";
+option go_package = "./main";
 
 message ToFrontEnd {
     oneof type {
-        Nonce github_nonce = 1;
+        Nonce github_state = 1;
         AccessCode access_code = 2;
     };
 }
