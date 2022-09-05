@@ -7,7 +7,7 @@ message BLESendPacket {
     GetWiFi getWifi = 2;
     WiFiConnectInfo wifiConnectInfo = 3;
     GetWiFiConnectState getWiFiConnectState = 4;
-    RegisterNonce nonce = 5;
+    RegisterToken token = 5;
   };
 }
 
@@ -18,8 +18,8 @@ message WiFiConnectInfo {
   string password = 2 [(nanopb).max_size = 64];
 }
 message GetWiFiConnectState{}
-message RegisterNonce {
-  string nonce = 1 [(nanopb).max_size = 16];
+message RegisterToken {
+  string uuid = 1 [(nanopb).max_length = 36];
 }
 
 message WiFiVector {
