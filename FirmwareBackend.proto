@@ -1,0 +1,59 @@
+syntax = "proto3";
+option go_package = "./protobuf_compiled";
+import "nanopb.proto";
+
+message FirmwareToBackendPacket {
+    oneof type {
+        SensorData sensor_data = 2;
+        SensorsList sensors_list = 17;
+        Registration registration = 18;
+    };
+}
+
+message UUID{
+    string uuid = 1 [(nanopb).max_length = 36];
+}
+message Registration {
+    UUID uuid_self = 1;
+    UUID uuid_user = 2;
+}
+
+message SensorsStart {}
+message SensorsStop {}
+
+message SensorsList {
+    repeated SensorInfo sensor_info = 1 [(nanopb).max_count = 64];
+}
+message SensorInfo{
+    UUID uuid_name = 1;
+    bool recognized = 2;
+    enum SENSOR_TYPE {
+        PICO = 0;
+        LPSTK = 1;
+        NORDIC_THINGY = 2;
+    };
+    SENSOR_TYPE sensor_type = 3;
+}
+
+message SensorData {
+    UUID origin_uuid = 1;
+    repeated UUID middle_uuids = 2 [(nanopb).max_count = 64];
+    oneof type {
+        float temp = 3;
+        float humidity = 4;
+    };
+}
+
+message BackendToFirmwarePacket {
+    oneof type {
+        GetSensorsList get_sensors_list = 1;
+        GetData get_data = 2;
+        AddSensor add_sensor = 3;
+    }
+}
+
+message GetSensorsList {}
+message GetData {}
+message AddSensor {
+    UUID sensor_uuid = 1;
+}
