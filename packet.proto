@@ -1,5 +1,5 @@
 syntax = "proto3";
-option go_package = "./main";
+option go_package = "./protobuf_compiled";
 import "nanopb.proto";
 message BLESendPacket {
   oneof type {
