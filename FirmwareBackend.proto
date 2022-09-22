@@ -40,12 +40,16 @@ message SensorData {
 
 message BackendToFirmwarePacket {
     oneof type {
-        GetSensorsList get_sensors_list = 1;
-        ClearSensorList clear_sensor_list = 2;
-        AddSensor add_sensor = 3;
+        Ack ack = 1;
+        GetSensorsList get_sensors_list = 2;
+        ClearSensorList clear_sensor_list = 3;
+        AddSensor add_sensor = 4;
     }
 }
 
+message Ack {
+  int64 id = 1;
+}
 message GetSensorsList {}
 message ClearSensorList {}
 message AddSensor {
