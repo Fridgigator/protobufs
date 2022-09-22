@@ -25,7 +25,7 @@ message SensorsList {
     repeated SensorInfo sensor_info = 1 [(nanopb).max_count = 64];
 }
 message SensorInfo{
-    string address = 1 [(nanopb).max_length = 12];
+    string address = 1 [(nanopb).max_length = 20];
     string name = 2 [(nanopb).max_length = 31];
 }
 
