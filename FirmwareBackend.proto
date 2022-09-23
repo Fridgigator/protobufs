@@ -53,6 +53,9 @@ message Ack {
 message GetSensorsList {}
 message ClearSensorList {}
 message AddSensor {
+    repeated AddSensorInfo add_sensor_info = 4 [(nanopb).max_count = 64];
+}
+message AddSensorInfo {
     SensorInfo sensor_info = 1;
     enum DEVICE_TYPE {
 	TI = 0;
