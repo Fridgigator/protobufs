@@ -61,6 +61,7 @@ message AddSensorInfo {
 	TI = 0;
 	NORDIC = 1;
 	CUSTOM = 2;
+    HUB = 3;
     };
     DEVICE_TYPE device_type = 2;
 }
