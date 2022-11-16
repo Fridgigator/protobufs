@@ -85,6 +85,11 @@ message ValuesInterDevice {
   DEVICE_TYPE device_type = 2;
   float value = 3;
   int64 timestamp = 4;
+  enum MEASURE_TYPE {
+    TEMP = 0;
+    HUMIDITY = 1;
+  };
+  MEASURE_TYPE measure_type = 5;
 }
 
 message SensorsListInterDevice {
