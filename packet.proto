@@ -88,6 +88,11 @@ message ValuesInterDevice {
   enum MEASURE_TYPE {
     TEMP = 0;
     HUMIDITY = 1;
+    DHT11_TEMP = 2;
+    DHT11_HUMIDITY = 3;
+    DHT22_TEMP = 4;
+    DHT22_HUMIDITY = 5;
+    PICO_TEMP = 6;
   };
   MEASURE_TYPE measure_type = 5;
 }
