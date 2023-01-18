@@ -1,0 +1,98 @@
+syntax = "proto3";
+import "nanopb.proto";
+option go_package = "./protobuf_compiled";
+
+message FirmwareToBackendPacket {
+  oneof type {
+    Ping ping = 1;
+    SensorData sensor_data = 2;
+    SensorsList sensors_list = 17;
+    Registration registration = 18;
+  };
+}
+
+message Ping {
+    
+}
+
+message UUID{
+  string uuid = 1 [(nanopb).max_length = 36];
+}
+
+message Registration {
+  UUID uuid_self = 1;
+  UUID uuid_user = 2;
+}
+
+message SensorsStart {
+
+}
+
+message SensorsStop {
+
+}
+
+message SensorsList {
+  repeated SensorInfo sensor_infos = 1 [(nanopb).max_count = 64];
+}
+message SensorInfo{
+  string address = 1 [(nanopb).max_length = 20];
+  string name = 2 [(nanopb).max_length = 31];
+}
+
+message SensorData {
+  string address = 1 [(nanopb).max_length = 20];
+  DataType data_type = 2;
+  double value = 3;
+  int64 timestamp = 4;
+}
+
+enum DataType {
+  DATA_TYPE_UNSPECIFIED = 0;
+  DATA_TYPE_TEMP = 1;
+  DATA_TYPE_HUMIDITY = 2;
+  DATA_TYPE_DHT22_TEMP = 3;
+  DATA_TYPE_DHT22_HUMIDITY = 4;
+  DATA_TYPE_DHT11_TEMP = 5;
+  DATA_TYPE_DHT11_HUMIDITY = 6;
+  DATA_TYPE_PICO_TEMP = 7;
+
+}
+
+message BackendToFirmwarePacket {
+  oneof type {
+    Ack ack = 1;
+    GetSensorsList get_sensors_list = 2;
+    ClearSensorList clear_sensor_list = 3;
+    AddSensor add_sensor = 4;
+  }
+}
+
+message Ack {
+  int64 id = 1;
+}
+
+message GetSensorsList {
+
+}
+
+message ClearSensorList {
+
+}
+
+message AddSensor {
+  repeated AddSensorInfo add_sensor_infos = 4 [(nanopb).max_count = 64];
+}
+
+enum DeviceType {
+  DEVICE_TYPE_UNSPECIFIED = 0;
+  DEVICE_TYPE_TI = 1;
+  DEVICE_TYPE_NORDIC = 2;
+  DEVICE_TYPE_CUSTOM = 3;
+  DEVICE_TYPE_HUB = 4;
+};
+
+message AddSensorInfo {
+  SensorInfo sensor_info = 1;
+  DeviceType device_type = 2;
+}
