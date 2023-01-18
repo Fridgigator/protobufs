@@ -8,6 +8,7 @@ message BLESendPacket {
     WiFiConnectInfo wifiConnectInfo = 3;
     GetWiFiConnectState getWiFiConnectState = 4;
     RegisterToken token = 5;
+    CrossDevicePacket crossDevicePacket = 6;
   };
 }
 
@@ -61,4 +62,44 @@ message LoginResponse {
 }
 
 message LoginError{}
+
+
+message CrossDevicePacket {
+  SensorsListInterDevice sensorList = 1;
+  ValuesInterDeviceList values = 2 [(nanopb).max_count = 64];
+  int64 timestamp = 3;
+}
+
+message ValuesInterDeviceList {
+    repeated ValuesInterDevice values = 1 [(nanopb).max_count = 64];
+}
+
+message ValuesInterDevice {
+  string address = 1 [(nanopb).max_length = 21];
+  enum DEVICE_TYPE {
+      TI = 0;
+      NORDIC = 1;
+      CUSTOM = 2;
+      HUB = 3;
+  };
+  DEVICE_TYPE device_type = 2;
+  float value = 3;
+  int64 timestamp = 4;
+}
+
+message SensorsListInterDevice {
+    repeated SensorInfoInterDevice sensor_info = 1 [(nanopb).max_count = 64];
+}
+message SensorInfoInterDevice {
+   string address = 1 [(nanopb).max_length = 21];
+   enum DEVICE_TYPE {
+        TI = 0;
+        NORDIC = 1;
+        CUSTOM = 2;
+        HUB = 3;
+    };
+    DEVICE_TYPE device_type = 2;
+ 
+}
+    
 
