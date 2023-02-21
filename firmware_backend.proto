@@ -1,5 +1,5 @@
 syntax = "proto3";
-import "nanopb.proto";
+package fridgigator.firmware_backend;
 option go_package = "./protobuf_compiled";
 
 message FirmwareToBackendPacket {
@@ -16,7 +16,7 @@ message Ping {
 }
 
 message UUID{
-  string uuid = 1 [(nanopb).max_length = 36];
+  string uuid = 1;
 }
 
 message Registration {
@@ -33,15 +33,15 @@ message SensorsStop {
 }
 
 message SensorsList {
-  repeated SensorInfo sensor_infos = 1 [(nanopb).max_count = 64];
+  repeated SensorInfo sensor_infos = 1;
 }
 message SensorInfo{
-  string address = 1 [(nanopb).max_length = 20];
-  string name = 2 [(nanopb).max_length = 31];
+  string address = 1;
+  string name = 2;
 }
 
 message SensorData {
-  string address = 1 [(nanopb).max_length = 20];
+  string address = 1;
   DataType data_type = 2;
   double value = 3;
   int64 timestamp = 4;
@@ -81,7 +81,7 @@ message ClearSensorList {
 }
 
 message AddSensor {
-  repeated AddSensorInfo add_sensor_infos = 4 [(nanopb).max_count = 64];
+  repeated AddSensorInfo add_sensor_infos = 4;
 }
 
 enum DeviceType {
