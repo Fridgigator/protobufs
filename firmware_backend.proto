@@ -6,8 +6,9 @@ message FirmwareToBackendPacket {
   oneof type {
     Ping ping = 1;
     SensorData sensor_data = 2;
-    SensorsList sensors_list = 17;
+    DevicesList devices_list = 17;
     Registration registration = 18;
+    StopGetDevicesList stop_get_devices_list = 19;
   };
 }
 
@@ -16,7 +17,8 @@ message Ping {
 }
 
 message UUID{
-  string uuid = 1;
+  int64 uuid_lower = 1;
+  int64 uuid_higher = 2;
 }
 
 message Registration {
@@ -28,20 +30,14 @@ message SensorsStart {
 
 }
 
-message SensorsStop {
-
-}
-
-message SensorsList {
-  repeated SensorInfo sensor_infos = 1;
-}
-message SensorInfo{
-  string address = 1;
+message DeviceInfo{
+  int64 address = 1;
   string name = 2;
+  DeviceType device_type = 3;
 }
 
 message SensorData {
-  string address = 1;
+  int64 address = 1;
   DataType data_type = 2;
   double value = 3;
   int64 timestamp = 4;
@@ -56,33 +52,34 @@ enum DataType {
   DATA_TYPE_DHT11_TEMP = 5;
   DATA_TYPE_DHT11_HUMIDITY = 6;
   DATA_TYPE_PICO_TEMP = 7;
-
 }
 
 message BackendToFirmwarePacket {
   oneof type {
     Ack ack = 1;
-    GetSensorsList get_sensors_list = 2;
-    ClearSensorList clear_sensor_list = 3;
-    AddSensor add_sensor = 4;
+    GetDevicesList get_devices_list = 2;
+    StopGetDevicesList stop_get_devices_list = 3;
+    // Can't oneof repeated
+    DevicesList devices = 4;
   }
+}
+
+message DevicesList {
+  repeated DeviceInfo devices = 1;
 }
 
 message Ack {
   int64 id = 1;
 }
 
-message GetSensorsList {
+message GetDevicesList {
 
 }
 
-message ClearSensorList {
+message StopGetDevicesList {
 
 }
 
-message AddSensor {
-  repeated AddSensorInfo add_sensor_infos = 4;
-}
 
 enum DeviceType {
   DEVICE_TYPE_UNSPECIFIED = 0;
@@ -91,8 +88,3 @@ enum DeviceType {
   DEVICE_TYPE_CUSTOM = 3;
   DEVICE_TYPE_HUB = 4;
 };
-
-message AddSensorInfo {
-  SensorInfo sensor_info = 1;
-  DeviceType device_type = 2;
-}
