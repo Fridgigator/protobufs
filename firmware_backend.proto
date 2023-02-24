@@ -56,7 +56,6 @@ enum DataType {
 
 message BackendToFirmwarePacket {
   oneof type {
-    Ack ack = 1;
     GetDevicesList get_devices_list = 2;
     StopGetDevicesList stop_get_devices_list = 3;
     // Can't oneof repeated
@@ -66,10 +65,6 @@ message BackendToFirmwarePacket {
 
 message DevicesList {
   repeated DeviceInfo devices = 1;
-}
-
-message Ack {
-  int64 id = 1;
 }
 
 message GetDevicesList {
