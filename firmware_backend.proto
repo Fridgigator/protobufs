@@ -6,7 +6,7 @@ message FirmwareToBackendPacket {
   oneof type {
     Ping ping = 1;
     SensorData sensor_data = 2;
-    DevicesList devices_list = 17;
+    DeviceInfo device_info = 17;
     Registration registration = 18;
     StopGetDevicesList stop_get_devices_list = 19;
   };
