@@ -1,0 +1,23 @@
+syntax = "proto3";
+package fridgigator.firmware_backend;
+option go_package = "./protobuf_compiled";
+
+message DeviceInfo{
+  int64 address = 1;
+  string name = 2;
+  DeviceType device_type = 3;
+}
+
+message DevicesList {
+  repeated DeviceInfo devices = 1;
+}
+
+enum DeviceType {
+  DEVICE_TYPE_UNSPECIFIED = 0;
+  DEVICE_TYPE_TI = 1;
+  DEVICE_TYPE_NORDIC = 2;
+  DEVICE_TYPE_CUSTOM = 3;
+  DEVICE_TYPE_HUB = 4;
+  DEVICE_TYPE_PICO = 5;
+};
+

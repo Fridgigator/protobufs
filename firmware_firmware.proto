@@ -1,0 +1,13 @@
+syntax = "proto3";
+package fridgigator.firmware_backend;
+option go_package = "./protobuf_compiled";
+import "commons.proto";
+
+message FirmwareToFirmwarePacket {
+  int64 timestamp = 1;
+  oneof type {
+    DevicesList devices_list = 2;
+  };
+}
+
+

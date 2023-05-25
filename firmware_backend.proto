@@ -1,6 +1,7 @@
 syntax = "proto3";
 package fridgigator.firmware_backend;
 option go_package = "./protobuf_compiled";
+import "commons.proto";
 
 message FirmwareToBackendPacket {
   oneof type {
@@ -30,12 +31,6 @@ message SensorsStart {
 
 }
 
-message DeviceInfo{
-  int64 address = 1;
-  string name = 2;
-  DeviceType device_type = 3;
-}
-
 message SensorData {
   int64 address = 1;
   DataType data_type = 2;
@@ -55,16 +50,13 @@ enum DataType {
 }
 
 message BackendToFirmwarePacket {
+  int64 timestamp = 1;
   oneof type {
     GetDevicesList get_devices_list = 2;
     StopGetDevicesList stop_get_devices_list = 3;
     // Can't oneof repeated
     DevicesList devices = 4;
   }
-}
-
-message DevicesList {
-  repeated DeviceInfo devices = 1;
 }
 
 message GetDevicesList {
@@ -75,11 +67,3 @@ message StopGetDevicesList {
 
 }
 
-
-enum DeviceType {
-  DEVICE_TYPE_UNSPECIFIED = 0;
-  DEVICE_TYPE_TI = 1;
-  DEVICE_TYPE_NORDIC = 2;
-  DEVICE_TYPE_CUSTOM = 3;
-  DEVICE_TYPE_HUB = 4;
-};
