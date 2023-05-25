@@ -1,6 +1,4 @@
 syntax = "proto3";
-package fridgigator.firmware_backend;
-option go_package = "./protobuf_compiled";
 
 message DeviceInfo{
   int64 address = 1;
