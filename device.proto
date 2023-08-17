@@ -1,0 +1,31 @@
+syntax = "proto3";
+import "sensor.proto";
+option go_package = "./protobuf_compiled";
+
+message Device {
+  oneof device {
+    Pico pico = 1;
+    DeviceTI ti = 2;
+    DeviceNordic nordic = 3;
+  };
+}
+
+message Pico {
+  repeated int32 name_bytes = 1;
+  repeated int32 mac_bytes = 2;
+  DHT11 dht11 = 3;
+  DHT22 dht22 = 4;
+  PicoInternal pico_internal = 5;
+}
+
+message DeviceTI {
+  repeated int32 name_bytes = 1;
+  repeated int32 mac_bytes = 2;
+  SensorTI ti = 3;
+}
+
+message DeviceNordic {
+  repeated int32 name_bytes = 1;
+  repeated int32 mac_bytes = 2;
+  SensorNordic nordic = 3;
+}

@@ -1,0 +1,36 @@
+syntax = "proto3";
+option go_package = "./protobuf_compiled";
+
+message Sensor {
+  oneof sensor {
+    DHT11 dht11 = 1;
+    DHT22 dht22 = 2;
+    SensorTI ti = 3;
+    SensorNordic nordic = 4;
+  };
+}
+
+message DHT11 {
+  float temp = 1;
+  float humidity = 2;
+}
+
+message DHT22 {
+  float temp = 1;
+  float humidity = 2;
+}
+
+message SensorTI {
+  float temp = 1;
+  float humidity = 2;
+}
+
+message SensorNordic {
+  float temp = 1;
+  float humidity = 2;
+}
+
+message PicoInternal {
+  float temp = 1;
+  float humidity = 2;
+}
