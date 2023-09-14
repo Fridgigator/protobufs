@@ -3,29 +3,31 @@ import "sensor.proto";
 option go_package = "./protobuf_compiled";
 
 message Device {
+  // Device is sent when finding devices. You'd need this around then
+  bytes name = 1;
+  // Device is sent when finding devices. You'd need this around then
+  bytes mac = 2;
   oneof device {
-    Pico pico = 1;
-    DeviceTI ti = 2;
-    DeviceNordic nordic = 3;
+    Pico pico = 3;
+    DeviceTI ti = 4;
+    DeviceNordic nordic = 5;
   };
 }
 
+message DeviceID {
+  int64 device = 1;
+}
+
 message Pico {
-  repeated int32 name_bytes = 1;
-  repeated int32 mac_bytes = 2;
-  DHT11 dht11 = 3;
-  DHT22 dht22 = 4;
-  PicoInternal pico_internal = 5;
+  DHT11 dht11 = 1;
+  DHT22 dht22 = 2;
+  PicoInternal pico_internal = 3;
 }
 
 message DeviceTI {
-  repeated int32 name_bytes = 1;
-  repeated int32 mac_bytes = 2;
-  SensorTI ti = 3;
+  SensorTI ti = 1;
 }
 
 message DeviceNordic {
-  repeated int32 name_bytes = 1;
-  repeated int32 mac_bytes = 2;
-  SensorNordic nordic = 3;
+  SensorNordic nordic = 1;
 }

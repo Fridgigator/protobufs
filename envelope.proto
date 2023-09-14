@@ -1,0 +1,48 @@
+syntax = "proto3";
+import "google/protobuf/timestamp.proto";
+
+import "device.proto";
+import "sensor.proto";
+
+option go_package = "./protobuf_compiled";
+
+message Envelope {
+  // For security
+  bytes board_uuid = 1;
+  // The recipient's mac address (empty means its to the web)
+  bytes target = 2;
+  // The sender's mac address (empty means its from the web)
+  bytes source = 3;
+  google.protobuf.Timestamp timestamp = 4;
+  repeated bytes historical_node_ids = 5;
+  bytes message_sha512_bytes = 6;
+  bytes message_bytes = 7;
+}
+
+message Message {
+  oneof message {
+    // Used to send a found device to the server and to send device data
+    // to the client
+    Device device = 1;
+    // Used to transmit data to the server
+    Sensor sensor = 2;
+    // Used to ping the server and the client
+    Ack ack = 3;
+    // Used to notify the device to search for neighbors
+    Device search_devices = 4;
+    // Device asks for devices it should be able to see
+    ListDevices list_devices = 5;
+    // Device registers itself with an ID
+    RegisterDevice register_device = 6;
+  }
+}
+
+message Ack {
+}
+
+message RegisterDevice {
+  int64 device_id = 1;
+}
+
+message ListDevices {
+}

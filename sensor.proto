@@ -1,36 +1,39 @@
 syntax = "proto3";
+import "google/protobuf/timestamp.proto";
+
 option go_package = "./protobuf_compiled";
 
 message Sensor {
+  google.protobuf.Timestamp timestamp = 1;
   oneof sensor {
-    DHT11 dht11 = 1;
-    DHT22 dht22 = 2;
-    SensorTI ti = 3;
-    SensorNordic nordic = 4;
+    DHT11 dht11 = 2;
+    DHT22 dht22 = 3;
+    SensorTI ti = 4;
+    SensorNordic nordic = 5;
+    PicoInternal pico_internal = 6;
   };
 }
 
 message DHT11 {
-  float temp = 1;
-  float humidity = 2;
+  double temp = 1;
+  double humidity = 2;
 }
 
 message DHT22 {
-  float temp = 1;
-  float humidity = 2;
+  double temp = 1;
+  double humidity = 2;
 }
 
 message SensorTI {
-  float temp = 1;
-  float humidity = 2;
+  double temp = 1;
+  double humidity = 2;
 }
 
 message SensorNordic {
-  float temp = 1;
-  float humidity = 2;
+  double temp = 1;
+  double humidity = 2;
 }
 
 message PicoInternal {
-  float temp = 1;
-  float humidity = 2;
+  double temp = 1;
 }
